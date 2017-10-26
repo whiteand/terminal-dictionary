@@ -15,6 +15,6 @@ You can download it via go get command:
 
 After this, you should compile dict.go file:
 
-`go build dict.go file`
+`go build dict.go
 
 You can copy this file to your %PATH% directory to make program global.
