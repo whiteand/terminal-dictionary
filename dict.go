@@ -17,6 +17,23 @@ const tableSelector = "#right div table"
 const fromWordsSelector = "tbody tr td:first-child"
 const toWordsSelector = "tbody tr td:last-child"
 
+func main() {
+	flag.Parse()
+	if len(flag.Args()) != 1 {
+		showHelp()
+		return
+	}
+	word := flag.Args()[0]
+	eng2ruChan := getTranslations(word, EnRu, !*isSim)
+	ru2engChan := getTranslations(word, RuEn, !*isSim)
+	for val := range eng2ruChan {
+		fmt.Println(val)
+	}
+	for val := range ru2engChan {
+		fmt.Println(val)
+	}
+}
+
 type DictPair struct {
 	Word        string
 	Translation string
@@ -88,20 +105,4 @@ func showHelp() {
 The -sim flag tells that you want to see the translation of 
 this particular word, not looking for similar words.
 `)
-}
-func main() {
-	flag.Parse()
-	if len(flag.Args()) != 1 {
-		showHelp()
-		return
-	}
-	word := flag.Args()[0]
-	eng2ruChan := getTranslations(word, EnRu, !*isSim)
-	ru2engChan := getTranslations(word, RuEn, !*isSim)
-	for val := range eng2ruChan {
-		fmt.Println(val)
-	}
-	for val := range ru2engChan {
-		fmt.Println(val)
-	}
 }
